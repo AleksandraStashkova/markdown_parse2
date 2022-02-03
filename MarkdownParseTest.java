@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class MarkdownParseTest {
     @Test
     public void testEmpty() throws IOException {
-        assertLinks(List.of(), "/Users/sasha/Downloads/markdown-parse-main/testCases/empty.md");
+        assertLinks(List.of(), "testCases/empty.md");
     }
 
     @Test
