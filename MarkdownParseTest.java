@@ -55,13 +55,14 @@ public class MarkdownParseTest {
         assertLinks(List.of("last line link should be found"), "testCases/lastLine.md");
     }
 
-    @Test
-    public void test1() throws IOException {
-        Path fileName = Path.of("testCases/test1.md");
-        String contents = Files.readString(fileName);
-        ArrayList<String> links = MarkdownParse.getLinks(contents);
-        System.out.println(links);
-    }
+    String halfPath = "/Users/sasha/Documents/GitHub/markdown_parse2/testCases/";
+    // @Test
+    // public void test1() throws IOException {
+    //     Path fileName = Path.of("testCases/test1.md");
+    //     String contents = Files.readString(fileName);
+    //     ArrayList<String> links = MarkdownParse.getLinks(contents);
+    //     System.out.println(links);
+    // }
 
     public static void assertLinks(List<String> expectedLinks, String fileName) throws IOException {
         Path filePath = Path.of(fileName);
@@ -69,5 +70,47 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(contents);
 
         assertEquals(expectedLinks, links);
+    }
+
+    @Test
+    public void test1() throws IOException{
+        Path fileName = Path.of(halfPath + "test1.md");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("`google.com");
+        expected.add("google.com");
+        expected.add("ucsd.edu");
+
+        assertEquals(expected, links);
+    }
+
+    @Test
+    public void test2() throws IOException {
+        Path fileName = Path.of(halfPath + "test2.md");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        System.out.println(links);
+
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("a.com");
+        expected.add("a.com(())");
+        expected.add("example.com");
+
+        assertEquals(expected, links);
+    }
+
+    @Test
+    public void test3() throws IOException {
+        Path fileName = Path.of(halfPath + "test3.md");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        System.out.println(links);
+
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("https://ucsd-cse15l-w22.github.io/%22");
+
+        assertEquals(expected, links);
     }
 }
